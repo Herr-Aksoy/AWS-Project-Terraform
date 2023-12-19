@@ -20,13 +20,29 @@ resource "aws_route_table" "proje2_private_rt" {
   }
 }
 
-# Özel route table'a route ekleme
-# resource "aws_route" "nat_instance_route" {
-#   route_table_id         = aws_route_table.proje2_private_rt.id
-#   destination_cidr_block = "0.0.0.0/0"
-#   instance_id            = aws_instance.nat_instance.id
-#   depends_on = [ aws_instance.nat_instance ]
-# }
+
+data "aws_network_interfaces" "all_nat_network_interfaces" {
+  for_each = toset([
+    aws_subnet.proje2_public_subnet[0].id,
+    aws_subnet.proje2_public_subnet[1].id
+  ])
+
+  filter {
+    name   = "subnet-id"
+    values = [each.value]
+  }
+}
+
+resource "aws_route" "nat_instance_route" {
+  for_each = {
+    for k, v in data.aws_network_interfaces.all_nat_network_interfaces : k => v.ids[0] if length(v.ids) > 0
+  }
+
+  route_table_id         = aws_route_table.proje2_private_rt.id
+  destination_cidr_block = "0.0.0.0/0"
+  network_interface_id   = each.value
+  depends_on             = [aws_instance.nat_instance]
+}
 
 
 
