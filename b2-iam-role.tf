@@ -24,33 +24,33 @@ resource "aws_iam_instance_profile" "proje2_iam_profile" {
   role = aws_iam_role.proje2_EC2_S3_Full_Access.name
 }
 
-resource "aws_iam_policy" "sns_access_policy" {
-  name        = "sns-access-policy"
-  description = "Policy for SNS access"
+# resource "aws_iam_policy" "sns_access_policy" {
+#   name        = "sns-access-policy"
+#   description = "Policy for SNS access"
   
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [{
-      Effect    = "Allow",
-      Action    = [
-        "sns:Publish",
-        "sns:Subscribe",
-        "sns:Receive"
-      ],
-      Resource  = "*"  # Tüm SNS kaynaklarına erişim için "*" kullanılabilir, ancak güvenlik açısından daha spesifik bir ARN tercih edilebilir
-    }]
-  })
-}
+#   policy = jsonencode({
+#     Version = "2012-10-17",
+#     Statement = [{
+#       Effect    = "Allow",
+#       Action    = [
+#         "sns:Publish",
+#         "sns:Subscribe",
+#         "sns:Receive"
+#       ],
+#       Resource  = "*"  # Tüm SNS kaynaklarına erişim için "*" kullanılabilir, ancak güvenlik açısından daha spesifik bir ARN tercih edilebilir
+#     }]
+#   })
+# }
 
-resource "aws_iam_policy_attachment" "attach_sns_access_policy" {
-  name       = "attach-sns-access-policy"
-  roles      = [aws_iam_role.proje2_EC2_S3_Full_Access.name]
-  policy_arn = aws_iam_policy.sns_access_policy.arn
-}
+# resource "aws_iam_policy_attachment" "attach_sns_access_policy" {
+#   name       = "attach-sns-access-policy"
+#   roles      = [aws_iam_role.proje2_EC2_S3_Full_Access.name]
+#   policy_arn = aws_iam_policy.sns_access_policy.arn
+# }
 
-resource "aws_sns_topic" "proje2_topic" {
-  name = "proje2_topic"
-}
+# resource "aws_sns_topic" "proje2_topic" {
+#   name = "proje2_topic"
+# }
 
 # resource "aws_sns_topic_subscription" "proje2_topic_subscription" {
 #   topic_arn = aws_sns_topic.proje2_topic.arn
