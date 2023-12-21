@@ -1,7 +1,7 @@
 
 
 resource "aws_instance" "nat_instance" {
-  ami           = "ami-0fa1ca9559f1892ec"
+  ami           = "ami-0e64637f6498ed00f"
   instance_type = "t2.micro"
   key_name      = "neu"
   source_dest_check = false // Kaynak/Hedef doğrulama ayarını durdurma (stop) işlemi

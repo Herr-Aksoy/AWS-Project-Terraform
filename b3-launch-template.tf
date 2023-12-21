@@ -12,7 +12,7 @@ resource "aws_launch_template" "proje2_launch_template" {
     }
   }
 
-  image_id      = "ami-06aa3f7caf3a30282"  
+  image_id      = "ami-0c7217cdde317cfec"             ## degistir
   instance_type = "t2.micro"
   key_name      = "neu"
 
@@ -31,22 +31,24 @@ resource "aws_launch_template" "proje2_launch_template" {
     }
   }
 
-  user_data = base64encode(<<EOF
-              #!/bin/bash
-              apt-get update -y
-              apt-get install -y git python3
-              cd /home/ubuntu/
-              git clone https://@github.com/Herr-Aksoy/Proje2-Team.git
-              cd /home/ubuntu/Proje2-Team
-              apt-get install -y python3-pip python3.7-dev libmysqlclient-dev
-              pip3 install -r requirements.txt
-              cd /home/ubuntu/Proje2-Team/src
-              python3 manage.py collectstatic --noinput
-              python3 manage.py makemigrations
-              python3 manage.py migrate
-              python3 manage.py runserver 0.0.0.0:80
-              EOF
-  )
+  user_data = filebase64("./s3_Website/userdata.sh")
+
+  # user_data = base64encode(<<EOF
+  #             #!/bin/bash
+  #             apt-get update -y
+  #             apt-get install -y git python3
+  #             cd /home/ubuntu/
+  #             git clone https://@github.com/Herr-Aksoy/Proje2-Team.git
+  #             cd /home/ubuntu/Proje2-Team
+  #             apt-get install -y python3-pip python3.7-dev libmysqlclient-dev
+  #             pip3 install -r requirements.txt
+  #             cd /home/ubuntu/Proje2-Team/src
+  #             python3 manage.py collectstatic --noinput
+  #             python3 manage.py makemigrations
+  #             python3 manage.py migrate
+  #             python3 manage.py runserver 0.0.0.0:80
+  #             EOF
+  # )
 }
 
 

@@ -5,6 +5,7 @@ apt-get install python3 -y
 cd /home/ubuntu/
 # TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 git clone https://@github.com/Herr-Aksoy/Proje2-Team.git    #$TOKEN
+ # https://github.com/Herr-Aksoy/Proje2-Team.git
 cd /home/ubuntu/Proje2-Team
 apt install python3-pip -y
 apt-get install python3.7-dev libmysqlclient-dev -y
