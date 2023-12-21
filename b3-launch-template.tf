@@ -12,7 +12,7 @@ resource "aws_launch_template" "proje2_launch_template" {
     }
   }
 
-  image_id      = "ami-0c7217cdde317cfec"             ## degistir
+  image_id      = "ami-055744c75048d8296"             ## degistir
   instance_type = "t2.micro"
   key_name      = "neu"
 
