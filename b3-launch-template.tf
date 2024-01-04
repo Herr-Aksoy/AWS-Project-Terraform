@@ -14,7 +14,7 @@ resource "aws_launch_template" "proje2_launch_template" {
 
   image_id      = "ami-055744c75048d8296"             ## degistir
   instance_type = "t2.micro"
-  key_name      = "neu"
+  key_name      = var.user_name     #"neu"
 
   iam_instance_profile {
     name = aws_iam_instance_profile.proje2_iam_profile.name
@@ -24,10 +24,11 @@ resource "aws_launch_template" "proje2_launch_template" {
     security_groups = [aws_security_group.proje2_EC2_Sec_Group.id]
   }
 
+
   tag_specifications {
     resource_type = "instance"
     tags = {
-      Name = "proje2_web_server"
+      Name = "proje2_web_server"                # "WebApp${count.index + 1}"
     }
   }
 

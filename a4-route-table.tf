@@ -20,7 +20,7 @@ resource "aws_route_table" "proje2_private_rt" {
   }
 }
 
-
+                                                                                ## Burada route eni ekliyor ama calismiyor
 
 # data "aws_network_interfaces" "all_nat_network_interfaces" {
 #   for_each = toset([
